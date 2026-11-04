@@ -34,6 +34,26 @@ Requires a Firefox-based desktop browser, version 115 or newer, and access to HB
 
 Subtitles follow pauses and seeking. Tracks clear when navigating to another title. Files and preferences are not saved.
 
+## How it works
+
+The extension reads HBO Max's playback manifest to discover subtitle languages, then downloads the tracks you select. You can also load local subtitle files. Cue timing follows the video clock, so pausing and seeking keep the subtitles in sync.
+
+```mermaid
+flowchart TD
+    HBO["HBO Max playback"] --> Manifest["DASH / HLS manifest"]
+    Manifest --> Observe["Extension reads manifest"]
+    Observe --> Tracks["Available subtitle languages"]
+    Tracks --> Select["Choose first and second languages"]
+    Select --> Fetch["Download selected subtitle tracks"]
+    Fetch --> Parse["Parse cues and normalize timing"]
+    Files["Local SRT / VTT files"] --> Parse
+    Parse --> Active["Find cues for the current video time"]
+    Clock["Video clock + subtitle delay"] --> Active
+    Active --> Display["Show both subtitle lines over the video"]
+```
+
+HBO Max continues to play the video. If you keep its native captions enabled, the extension can display just the second language above them. Local subtitle files stay on your device.
+
 ## Compatibility
 
 Reported working on HBO Max in Zen by the project owner. Automated browser checks cover Thai/English discovery, selection, rendering, seeking, and navigation with synthetic playback data. Other titles, regions, and browser versions may behave differently.
