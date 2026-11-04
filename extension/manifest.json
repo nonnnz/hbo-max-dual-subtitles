@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "HBO Max Dual Subtitles",
+  "version": "0.2.0",
+  "description": "Two synchronized subtitle tracks on HBO Max, for Zen and Firefox.",
+  "browser_specific_settings": {"gecko": {"id": "dual-sub@local", "strict_min_version": "115.0"}},
+  "permissions": ["webRequest", "webRequestBlocking", "https://*/*"],
+  "background": {"scripts": ["background.js"]},
+  "content_scripts": [{
+    "matches": ["https://hbomax.com/*", "https://*.hbomax.com/*", "https://max.com/*", "https://*.max.com/*"],
+    "js": ["subtitles.js", "dash.js", "content.js"],
+    "run_at": "document_start"
+  }]
+}

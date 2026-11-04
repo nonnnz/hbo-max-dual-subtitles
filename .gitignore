@@ -1,0 +1,11 @@
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
+
+# Generated packages and local tooling.
+/dist/
+/node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.*
